@@ -1,6 +1,6 @@
 # Sentiment analysis of Reddit comments using R's tidytext package
 
-In February 2018, [Felippe Rodrigues](https://twitter.com/fsorodrigues) and I published a story at Smithsonianmag.com about brain-boosting substances that are at once banned in the Olympics and popular in the tech world. To understand the size and tenor of the conversation surrounding these so-called "nootropics" - think the pill from the movie *Limitless* - we used R's ```tidytext``` package to analyze more than 150,000 Reddit comments scraped using Python.
+In February 2018, [Felippe Rodrigues](https://twitter.com/fsorodrigues) and I published a story at Smithsonianmag.com about brain-boosting substances that are at once banned in the Olympics and popular in the tech world. To understand the size and tenor of the conversation surrounding these so-called "nootropics" - think the pill from the movie *Limitless* - we used R's ```tidytext``` package to analyze more than 150,000 Reddit comments scraped using Python. RMarkdown file [here](https://raw.githubusercontent.com/aleszu/reddit-sentiment-analysis/master/sentiment-analysis-Reddit.Rmd).
 
 Here's how we did it. 
 
