@@ -1,6 +1,6 @@
 # Sentiment analysis of Reddit comments using R's tidytext package
 
-In February 2018, Felippe Rodrigues and I published a story at Smithsonianmag.com about brain-boosting substances that are at once banned in the Olympics and popular in the tech world. To understand the size and tenor of the conversation surrounding these so-called "nootropics"- think the pill from the movie *Limitless* - we used R's ```tidytext``` package to analyze more than 150,000 Reddit comments scraped using Python.
+In February 2018, Felippe Rodrigues and I published a story at Smithsonianmag.com about brain-boosting substances that are at once banned in the Olympics and popular in the tech world. To understand the size and tenor of the conversation surrounding these so-called "nootropics" - think the pill from the movie *Limitless* - we used R's ```tidytext``` package to analyze more than 150,000 Reddit comments scraped using Python.
 
 Here's how we did it. 
 
@@ -13,8 +13,10 @@ library(stringr)
 library(magrittr)
 library(dplyr)
 library(lubridate)
+
 # for sentiment analysis
 library(tidytext)
+
 # for visualization
 library(ggplot2)
 library(ggridges)
@@ -24,14 +26,13 @@ library(ggridges)
 
 Next, load in the 164,000 comments we scraped from the subreddits *r/Nootropics* and *r/StackAdvice*. By using ```glimpse()``` we can take a peek at the tibble in RStudio's console. 
 
-
 ```{r}
 All_comments <- read.csv("reddit/all_Noot_Stack_comments.csv", 
                          header=TRUE, stringsAsFactors=FALSE) 
 All_comments %>% glimpse()
 ```
 
-Next, we's filtered these Reddit comments by substance and then exported each as a CSV for manual exploration in Excel using *write.csv()*. 
+Next, we's filtered these Reddit comments by substance and then exported each as a CSV for manual exploration in Excel using ```write.csv()```. 
 
 ```{r}
 # Get caffeine comments
@@ -70,8 +71,7 @@ All_bacopa_comments <- All_comments %>%
 write.csv((All_bacopa_comments), "reddit/substances/all_bacopa_mentions.csv")
 ```
 
-
-In Excel, we surveyed each of these substances, adding a corresponding ```substance``` column to each csv. We then pasted all of these into one spreadsheet, which we named *all_substance_mentions.csv*.
+In Excel, we surveyed each of these substances, adding a corresponding ```substance``` column to each csv. We then pasted all of these into one spreadsheet, which we named ```all_substance_mentions.csv.
 
 This could have easily been done with the ```dplyr``` R package, too, FYI.
 
@@ -132,7 +132,7 @@ ggplot(TotalMentions, aes(time)) + geom_histogram(aes(fill=factor(substance)), s
 
 We employed sentiment analysis using the "tidytext" R package on our CSV file of mentions of all seven substances.
 
-First, load the AFINN sentiment analysis library that comes with "tidytext" 
+First, load the AFINN sentiment analysis library that comes with "tidytext"
 
 ```{r}
 AFINN <- sentiments %>%
@@ -142,7 +142,7 @@ AFINN <- sentiments %>%
 
 ## Tokenize comments and merge with words ranked by sentiment
 
-Next, tokenize comments into one-word rows and cut out stop words. Then join AFINN-scored words with words in comments, if present. Next, return a 114,000-row tibble with X1, substance, word and sentiment score. (Uncomment the *write.csv()* line to create a CSV of this tibble.)
+Next, tokenize comments into one-word rows and cut out stop words. Then join AFINN-scored words with words in comments, if present. Next, return a 114,000-row tibble with X1, substance, word and sentiment score. (Uncomment the ```write.csv()``` line to create a CSV of this tibble.)
 
 ```{r}
 TotalMentionsComments <- TotalMentions
@@ -162,7 +162,7 @@ all_sentiment
 
 ## Visualize sentiment analysis 
 
-Let's see what we've got. Using ```ggplot2``` we will plot words by sentiment and frequency, with dot size representing the frequency of words. Add a *geom_hline* to show the average sentiment. 
+Let's see what we've got. Using ```ggplot2``` we will plot words by sentiment and frequency, with dot size representing the frequency of words. Add a ```geom_hline``` to show the average sentiment. 
 
 ```{r}
 ggplot(all_sentiment, aes(x=substance, y = all_sentiment$sentiment)) +
@@ -183,7 +183,7 @@ Bind_sent_and_word <- all_sentiment %>%
   full_join(all_sentiment_wordcount, by="word")
 ```
 
-Ok, now we're ready to plot sentiment of all substances vs. word frequency, using *facet_wrap* to split up the charts by substance.
+Ok, now we're ready to plot sentiment of all substances vs. word frequency, using ```facet_wrap``` to split up the charts by substance.
 
 ```{r}
 ggplot(Bind_sent_and_word, aes(y=n, x=sentiment, color=substance)) +
