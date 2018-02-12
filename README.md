@@ -32,6 +32,8 @@ All_comments <- read.csv("reddit/all_Noot_Stack_comments.csv",
 All_comments %>% glimpse()
 ```
 
+![img1](http://aleszu.com/portfolio/reddit-sentiment/reddit-sent1.png)
+
 Next, we's filtered these Reddit comments by substance and then exported each as a CSV for manual exploration in Excel using ```write.csv()```. 
 
 ```{r}
@@ -95,6 +97,8 @@ TotalMentions %>%
   arrange(date) %>% glimpse() 
 ```
 
+![img2](http://aleszu.com/portfolio/reddit-sentiment/reddit-sent2.png)
+
 Finally, we'll use the ```ggplot2``` visualization package to plot mentions of each substance over time. Note: ```facet_grid``` breaks the plot out into small plots for each substance. 
 
 ```{r}
@@ -102,11 +106,15 @@ ggplot(TotalMentions, aes(Month)) + geom_histogram(aes(fill=factor(substance)), 
   facet_grid(~substance)
 ```
 
+![img3](http://aleszu.com/portfolio/reddit-sentiment/reddit-sent3.png)
+
 We also wondered if we could stack these substance mentions over time using what some call the "Joy Division" plot. It comes with the ```ggridges``` package. 
 
 ```{r}
 ggplot(TotalMentions, aes(x = Month, y = substance)) + geom_density_ridges()
 ```
+
+![img4](http://aleszu.com/portfolio/reddit-sentiment/reddit-sent4.png)
 
 We also tried visualizing using some other plots. 
 
@@ -122,6 +130,8 @@ ggplot(TotalMentions, aes(Month)) + geom_histogram(aes(fill=factor(substance)), 
 ```{r}
 ggplot(TotalMentions, aes(TotalMentions$Month, color=substance)) + geom_freqpoly(aes(binwidth=0.01), stat="bin") 
 ```
+
+![img5](http://aleszu.com/portfolio/reddit-sentiment/reddit-sent5.png)
 
 ```{r}
 ggplot(TotalMentions, aes(time)) + geom_histogram(aes(fill=factor(substance)), stat = "count")
@@ -160,6 +170,8 @@ all_sentiment
 # write.csv((all_sentiment), "reddit/all_sentiment.csv")
 ```
 
+![img6](http://aleszu.com/portfolio/reddit-sentiment/reddit-sent6.png)
+
 ## Visualize sentiment analysis 
 
 Let's see what we've got. Using ```ggplot2``` we will plot words by sentiment and frequency, with dot size representing the frequency of words. Add a ```geom_hline``` to show the average sentiment. 
@@ -170,6 +182,8 @@ ggplot(all_sentiment, aes(x=substance, y = all_sentiment$sentiment)) +
   geom_count() +
   geom_text(aes(label = word), check_overlap = TRUE, vjust = 1, hjust = 1) + geom_hline(yintercept = mean(all_sentiment$sentiment), color = "red", lty = 2)
 ```
+
+![img7](http://aleszu.com/portfolio/reddit-sentiment/reddit-sent7.png)
 
 To eventually plot sentiment vs. word frequency, we will need to count word occurences and then merge these two dataframes. 
 
@@ -182,6 +196,8 @@ all_sentiment_wordcount <- all_sentiment %>%
 Bind_sent_and_word <- all_sentiment %>%
   full_join(all_sentiment_wordcount, by="word")
 ```
+
+![img8](http://aleszu.com/portfolio/reddit-sentiment/reddit-sent8.png)
 
 Ok, now we're ready to plot sentiment of all substances vs. word frequency, using ```facet_wrap``` to split up the charts by substance.
 
@@ -209,9 +225,11 @@ ggplot(Filtered_sent_vs_word, aes(y=n, x=sentiment, color=substance)) +
   geom_point() +
   geom_text(aes(label = word), check_overlap = TRUE, vjust = 1.1, hjust = 1.1) 
 ```
+![img9](http://aleszu.com/portfolio/reddit-sentiment/reddit-sent9.png)
 
 We exported an SVG, brought it into Adobe Illustrator and designed it up. 
 
 That's it! 
 
+![img10](http://aleszu.com/portfolio/reddit-sentiment/sent-reddit-ai.png)
 
