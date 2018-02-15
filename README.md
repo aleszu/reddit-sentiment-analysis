@@ -1,6 +1,6 @@
 # Sentiment analysis of Reddit comments using R's tidytext package
 
-In February 2018, [Felippe Rodrigues](https://twitter.com/fsorodrigues) and I published a story at Smithsonianmag.com about brain-boosting substances that are at once banned in the Olympics and popular in the tech world. To understand the size and tenor of the conversation surrounding these so-called "nootropics" - think the pill from the movie *Limitless* - we used R's ```tidytext``` package to analyze more than 150,000 Reddit comments scraped using Python. RMarkdown file [here](https://raw.githubusercontent.com/aleszu/reddit-sentiment-analysis/master/sentiment-analysis-Reddit.Rmd).
+In February 2018, [Felippe Rodrigues](https://twitter.com/fsorodrigues) and I published a story at [Smithsonianmag.com](https://www.smithsonianmag.com/science-nature/banned-olympic-drugs-reddit-180968121/) about brain-boosting substances that are at once banned in the Olympics and popular in the tech world. To understand the size and tenor of the conversation surrounding these so-called "nootropics" - think the pill from the movie *Limitless* - we used R's ```tidytext``` package to analyze more than 150,000 Reddit comments scraped using Python. RMarkdown file [here](https://raw.githubusercontent.com/aleszu/reddit-sentiment-analysis/master/sentiment-analysis-Reddit.Rmd).
 
 Here's how we did it. 
 
@@ -73,7 +73,7 @@ All_bacopa_comments <- All_comments %>%
 write.csv((All_bacopa_comments), "reddit/substances/all_bacopa_mentions.csv")
 ```
 
-In Excel, we surveyed each of these substances, adding a corresponding ```substance``` column to each csv. We then pasted all of these into one spreadsheet, which we named ```all_substance_mentions.csv.
+In Excel, we surveyed each of these substances, adding a corresponding ```substance``` column to each csv. We then pasted all of these into one spreadsheet, which we named ```all_substance_mentions.csv```.
 
 This could have easily been done with the ```dplyr``` R package, too, FYI.
 
